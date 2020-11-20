@@ -76,7 +76,7 @@ public class SearchEngine
     }
 
     public static ArrayList indexing_queries() throws IOException {
-        String query_path = "../Search Engine/cran/cran.qry";
+        String query_path = "cran/cran.qry";
         HashMap hash_map = new HashMap();
         ArrayList array_list = new ArrayList();
 
@@ -94,6 +94,7 @@ public class SearchEngine
         {
             index++;
             query_data="";
+            hash_map = new HashMap();
 
             if(line.contains(".I"))
                 line=bufferedReader.readLine();
@@ -115,9 +116,14 @@ public class SearchEngine
 
             hash_map.put("ID",Integer.toString(index));
             hash_map.put("Query",query_data);
+
+            array_list.add(hash_map);
+            //System.out.println(index);
         }
 
-        array_list.add(hash_map);
+        //array_list.add(hash_map);
+        //System.out.println(hash_map);
+
         file_reader.close();
 
         return  array_list;
@@ -142,7 +148,7 @@ public class SearchEngine
     }
 
     public static ArrayList<String[]> search(String ID, String query_question) throws IOException, ParseException {
-        String columns[]=new String[]{"cranID","title","owner","content","index"};
+        String columns[]=new String[]{"cranID","title","author","content","index"};
 
         QueryParser query_parser = new MultiFieldQueryParser(columns,analyzer);
 
@@ -166,7 +172,7 @@ public class SearchEngine
             int id = Integer.parseInt(splits[0]);
 
             document_IDs.add(id);
-            String[] info = {""+q_ID,String.valueOf(id),
+            String[] info = {""+q_ID,"0",String.valueOf(id),
             Integer.toString(ranking++),Float.toString(hit.score),
             "STANDARD"};
 

@@ -40,7 +40,7 @@ public class CreateIndex {
 
     public static IndexWriter add_docs(IndexWriter index_writer) throws IOException {
         //System.out.println("No errors till now");
-        String doc_Path="C:/Users/Kaushik/Desktop/TCD/Information Retrieval and Web Search/Search Engine/cran/cran.all.1400";
+        String doc_Path="cran/cran.all.1400";
         //String doc_Path = "../cran/cran.all.1400";
 
         FileReader file_reader = new FileReader(doc_Path);
@@ -119,9 +119,11 @@ public class CreateIndex {
 
             Document doc = new Document();
             doc.add(new TextField("index",index+"",Field.Store.YES));
+            doc.add(new TextField("title",title,Field.Store.YES));
             doc.add(new TextField("author",author,Field.Store.YES));
-            doc.add(new TextField("publication",publication,Field.Store.YES));
+            //doc.add(new TextField("publication",publication,Field.Store.YES));
             doc.add(new TextField("content",content,Field.Store.YES));
+            doc.add(new TextField("cranID",index+"", Field.Store.YES));
 
             index_writer.addDocument(doc);
         }//end of while loop
