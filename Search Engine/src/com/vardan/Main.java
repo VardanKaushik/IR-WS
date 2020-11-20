@@ -12,5 +12,6 @@ public class Main {
         //System.out.println("Current wrd - "+current_directory);
         CreateIndex.Creating_Index();
         SearchEngine.Engine();
+        System.out.println("Searching Successful");
     }
 }
